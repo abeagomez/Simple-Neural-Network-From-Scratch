@@ -10,14 +10,36 @@ class Network():
         self.model_length = 0
 
     def add(self, layer):
+        """
+        Adds new layer at the end of Network
+
+        Arguments:
+            layer { Dense } -- [New Layer]
+        """
         self.model_length += 1
         layer.set_name(self.model_length)
         self.layers.append(layer)
 
     def build(self, input_size):
+        """
+        Initializes layers in Network
+        Arguments:
+            input_size {int} -- [input data dimension]
+        """
         self.__init_layers(input_size)
 
     def train(self, x_train, y_train, learning_rate=0.01, epochs=10):
+        """
+        Trains Network
+
+        Arguments:
+            x_train {np_matrix} -- [Training input set]
+            y_train {np_matrix} -- [Training output set]
+
+        Keyword Arguments:
+            learning_rate {float} -- [Netwrok learning rate] (default: {0.01})
+            epochs {int} -- [No. of epochs for training] (default: {10})
+        """
         for epoch in range(epochs):
             self.__forward_activation(x_train)
             AL = self.layers[-1].A
@@ -28,6 +50,15 @@ class Network():
             self.__update_layers_parameters(learning_rate)
 
     def predict(self, x_input, y_target, threshold=0.5):
+        """[summary]
+
+        Arguments:
+            x_input { np_matrix } -- [Testing input set]
+            y_target { np_matrix } -- [Testing output set]
+
+        Keyword Arguments:
+            threshold {float} -- [threshold value for binary segmentation] (default: {0.5})
+        """
         m = x_input.shape[1]
         self.__forward_activation(x_input)
         output = self.layers[-1].A

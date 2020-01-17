@@ -18,6 +18,7 @@ model.build(12288)
 model.train(x_train, y_train, epochs=3000, learning_rate=0.03)
 accuracy = model.predict(x_test, y_test)
 print(f"Accuracy: {accuracy*100}%")
+print("")
 
 # === TEST 2 ====
 
@@ -29,6 +30,7 @@ model.build(12288)
 model.train(x_train, y_train, epochs=3000, learning_rate=0.03)
 accuracy = model.predict(x_test, y_test)
 print(f"Accuracy: {accuracy*100}%")
+print("")
 
 # === TEST 3 ====
 
