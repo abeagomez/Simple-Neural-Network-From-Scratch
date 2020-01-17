@@ -69,9 +69,10 @@ class Layer(ABC):
 
 class Dense(Layer):
     """Regular densely-connected NN layer.
-    layer_output = activation(dot(input, weights) + bias)`
+    layer_output = activation(dot(input, weights) + bias)
     Note: The input to the layer should be flattened if has a rank greater
     than 2.
+
     # Arguments
         activation: Activation function to use.
         size: layer size
@@ -84,16 +85,16 @@ class Dense(Layer):
         Arguments:
             input_shape {[int]} -- [previous layer shape]
         """
-        self.__init_W(input_shape)
-        self.__init_b()
+        self.__create_W(input_shape)
+        self.__create_b()
 
-    def __init_W(self, prev_layer_size):
+    def __create_W(self, prev_layer_size):
         self.W = np.random.randn(
             self.size,
             prev_layer_size
         ) * 0.1
 
-    def __init_b(self):
+    def __create_b(self):
         self.b = np.zeros((self.size, 1))
 
     def forward_activation(self, A_prev):
@@ -101,10 +102,10 @@ class Dense(Layer):
         Performs forward activation over the layer based on input
 
         Arguments:
-            A_prev { np_ matrix } -- [Previous layer's output]
+            A_prev { np_matrix } -- [Previous layer's output]
 
         Returns:
-            [np_matrix] -- [Layer's output after activation]
+            A { np_matrix } -- [Layer's output after activation]
         """
         # Z = W*X + b
         # A = g(Z)
@@ -114,7 +115,7 @@ class Dense(Layer):
 
     def update_parameters(self, learning_rate):
         """
-            Updates Layer parameters
+            Updates Layer's parameters
 
         Arguments:
             learning_rate { float } -- [Learning rate value]

@@ -6,22 +6,22 @@ from utils import sigmoid, relu
 
 class TestDenseMethods(unittest.TestCase):
 
-    def test_name(self):
+    def test_set_name(self):
         layer = Dense(10, sigmoid)
         layer.set_name(1)
         self.assertEqual(layer.name, "layer_1")
-        layer.set_name("foo")
-        self.assertEqual(layer.name, "layer_foo")
-        layer.set_name(0.14)
-        self.assertEqual(layer.name, "layer_0.14")
 
-    def test_build(self):
+    def test_w_shape_after_build(self):
         layer = Dense(10, sigmoid)
         layer.build(20)
         self.assertEqual(layer.W.shape, (10, 20))
+
+    def test_b_shape_after_build(self):
+        layer = Dense(10, sigmoid)
+        layer.build(20)
         self.assertEqual(layer.b.shape, (10, 1))
 
-    def test_forward_activation(self):
+    def test_layer_output_shape_after_forward_activation(self):
         layer = Dense(10, sigmoid)
         layer.build(20)
         layer.forward_activation(np.random.randn(20, 35))

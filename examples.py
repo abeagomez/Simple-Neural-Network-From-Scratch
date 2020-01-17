@@ -10,6 +10,7 @@ x_train, y_train, x_test, y_test, classes = load_data()
 
 # === TEST 1 =====
 
+print("====== TEST 1 =====")
 model = Network()
 model.add(Dense(5, relu))
 model.add(Dense(5, relu))
@@ -22,6 +23,7 @@ print("")
 
 # === TEST 2 ====
 
+print("====== TEST 2 =====")
 model = Network()
 model.add(Dense(5, tanh))
 model.add(Dense(5, tanh))
@@ -34,6 +36,7 @@ print("")
 
 # === TEST 3 ====
 
+print("====== TEST 3 =====")
 model = Network()
 model.add(Dense(20, relu))
 model.add(Dense(7, relu))
