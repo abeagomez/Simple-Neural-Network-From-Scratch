@@ -41,3 +41,10 @@ class Dense():
 
     def init_b(self):
         self.b = np.zeros((self.size, 1))
+
+    def forward_activation(self, A_prev):
+        # Z = W*X + b
+        # A = g(Z)
+        self.Z = np.add(np.dot(self.W, A_prev), self.b)
+        self.A = self.activation(self.Z)
+        return self.A
