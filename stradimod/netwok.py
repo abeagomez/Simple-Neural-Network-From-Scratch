@@ -14,7 +14,7 @@ class Network():
         Adds new layer at the end of Network
 
         Arguments:
-            layer { Dense } -- [New Layer]
+            layer { Layer } -- [New Layer]
         """
         self.model_length += 1
         layer.set_name(self.model_length)
@@ -81,11 +81,10 @@ class Network():
             layer_input = layer.A
 
     def __backpropagation(self, AL, Y, X):
-        number_of_layers = len(self.layers)
         dAL = crossentropy(Y, AL, 0)
         dA_right = dAL
 
-        for l_index in reversed(range(0, number_of_layers)):
+        for l_index in reversed(range(0, self.model_length)):
             activation = self.layers[l_index].activation
             W_curr = self.layers[l_index].W
             Z_curr = self.layers[l_index].Z
@@ -98,21 +97,13 @@ class Network():
 
             self.layers[l_index].update_gradients(dW_curr, db_curr)
 
-    def __single_layer_backward(self, dA_right, Z, W, A_left, activation, log=False):
+    def __single_layer_backward(self, dA_right, Z, W, A_left, activation):
         m = A_left.shape[1]
         dZ = activation(Z, dA_right, 0)
 
         dW = np.dot(dZ, A_left.T) / m
         db = np.sum(dZ, axis=1, keepdims=True) / m
         dA_left = np.dot(W.T, dZ)
-
-        if log:
-            print("Single Layer Backward")
-            print(f"Z shape is {Z.shape}")
-            print(f"dA_right shape is {dA_right.shape}")
-            print(f"W shape is {W.shape}")
-            print(f"dZ shape is {dZ.shape}")
-            print(f"dA_left shape is {dA_left.shape}")
 
         return dA_left, dW, db
 
