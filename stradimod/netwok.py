@@ -1,6 +1,6 @@
 import numpy as np
-from .utils import *
 from .layers import Dense
+from .utils import crossentropy
 
 
 class Network():
