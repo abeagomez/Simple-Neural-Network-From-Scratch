@@ -3,7 +3,7 @@ import numpy as np
 
 def sigmoid(Z, dA=None, flag=1):
     '''
-    Z: Logists' values
+    Z: Layer's values
     dA: Gradient of layer A
     '''
     if flag:
@@ -21,9 +21,28 @@ def sigmoid_derivative(Z, dA):
     return dZ
 
 
+def tanh(Z, dA=None, flag=1):
+    '''
+    Z: Layer's values
+    dA: Gradient of layer A
+    '''
+    if flag:
+        return tanh_forward(Z)
+    return tanh_gradient(Z, dA)
+
+
+def tanh_forward(Z):
+    return np.tanh(Z)
+
+
+def tanh_gradient(Z, dA):
+    dZ = dA * (1 - np.square(tanh(Z)))
+    return dZ
+
+
 def relu(Z, dA=None, flag=1):
     '''
-    Z: Logists' values
+    Z: Layer's values
     dA: Gradient of layer A
     '''
     if flag:
