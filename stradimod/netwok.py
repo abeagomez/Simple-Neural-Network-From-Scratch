@@ -1,6 +1,6 @@
 import numpy as np
-import utils
-from layers import Dense
+from .utils import *
+from .layers import Dense
 
 
 class Network():
@@ -51,7 +51,7 @@ class Network():
 
     def __backpropagation(self, AL, Y, X):
         number_of_layers = len(self.layers)
-        dAL = activation_functions.crossentropy(Y, AL, 0)
+        dAL = crossentropy(Y, AL, 0)
         dA_right = dAL
 
         for l_index in reversed(range(0, number_of_layers)):
@@ -86,4 +86,4 @@ class Network():
         return dA_left, dW, db
 
     def __get_loss(self, output, target):
-        return utils.crossentropy(target, output)
+        return crossentropy(target, output)
