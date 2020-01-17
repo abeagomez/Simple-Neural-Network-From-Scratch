@@ -48,3 +48,11 @@ class Dense():
         self.Z = np.add(np.dot(self.W, A_prev), self.b)
         self.A = self.activation(self.Z)
         return self.A
+
+    def update_gradients(self, dW, db):
+        self.dW = dW
+        self.db = db
+
+    def update_parameters(self, learning_rate):
+        self.W = self.W - learning_rate * self.dW
+        self.b = self.b - learning_rate * self.db
